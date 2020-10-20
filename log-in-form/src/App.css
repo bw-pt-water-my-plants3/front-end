@@ -56,8 +56,17 @@ nav{
   margin: 0 auto;
   }
   
+a{
+  margin: 2rem;
+  text-align: right;
+  font-size: 1.75rem;
+  
+}
 
-  #root{
-    margin: 0 auto;
+
+  .Header{
+width: 100%;
+text-align: right;
+  
   }
   

@@ -8,7 +8,8 @@ export default function RegisterForm() {
     email: "",
     phone: "",
     username: "",
-    confirmation: ""
+    password: "",
+    verifyPassword: ""
   });
 
   const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
@@ -70,7 +71,8 @@ export default function RegisterForm() {
           email: "",
           phone: "",
           username: "",
-          confirmation: ""
+          password: "",
+          verifyPassword: ""
         });
       })
       .catch((err) => {
@@ -80,13 +82,16 @@ export default function RegisterForm() {
 
   console.log(submitForm)
 
+
   const formSchema = yup.object().shape({
     name: yup.string().required("Name is required."),
     email: yup.string().email(),
     phone: yup.string().required(),
     username: yup.string().required("Username is required."),
-    confirmation: yup.string().required("Enter a valid password")
+    password: yup.string().required("Enter a valid password"),
+    verifyPassword: yup.string().required("Enter a valid password")
   });
+
 
   useEffect(() => {
     formSchema.isValid(formState).then((valid) => {
