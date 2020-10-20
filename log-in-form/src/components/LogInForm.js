@@ -13,21 +13,32 @@ export default function LogInForm() {
 
   // post request
   const [post, setPost] = useState([]);
+  const [serverError, setServerError] = useState("");
 
   const handleChange = (e) => {
     const newFormObj = { ...formState, [e.target.name]: e.target.value };
     setFormState(newFormObj);
   };
 
+  // onSubmit function
   const submitForm = (e) => {
-    e.preventDefault();
-    // axios
-    // .post("https://reqres.in/api/users", formState)
-    // .then((resp)=>{
-    //   setPost(resp.data);
+    e.preventDefault()
+    axios
+      .post("https://reqres.in/api/users", formState)
+      .then((resp) => {
 
-    // });
-    setFormState({ username: "", password: "" });
+        setPost(resp.data);
+
+        setServerError(null)
+
+        setFormState({
+          username: "",
+          password: ""
+        });
+      })
+      .catch((err) => {
+        setServerError("oops! something happened!");
+      });
   };
 
   console.log(formState);
