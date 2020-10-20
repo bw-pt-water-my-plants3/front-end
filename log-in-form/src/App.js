@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import LogInForm from "./components/LogInForm";
 import RegisterForm from "./components/RegisterForm";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 export default function App() {
   return (

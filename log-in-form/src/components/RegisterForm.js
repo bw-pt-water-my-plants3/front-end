@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
+import axios from "axios";
 
 export default function RegisterForm() {
   const [formState, setFormState] = useState({
@@ -11,11 +12,41 @@ export default function RegisterForm() {
   });
 
   const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
+  const [post, setPost] = useState([]);
+  const [serverError, setServerError] = useState("");
 
   const handleChange = (e) => {
     const newFormObj = { ...formState, [e.target.name]: e.target.value };
     setFormState(newFormObj);
   };
+
+
+
+  // onSubmit function
+  const submitForm = (e) => {
+    e.preventDefault()
+    axios
+      .post("https://reqres.in/api/users", formState)
+      .then((resp) => {
+
+        setPost(resp.data);
+
+        setServerError(null)
+
+        setFormState({
+          name: "",
+          email: "",
+          phone: "",
+          username: "",
+          confirmation: ""
+        });
+      })
+      .catch((err) => {
+        setServerError("oops! something happened!");
+      });
+  };
+
+  console.log(submitForm)
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Name is required."),
@@ -34,7 +65,7 @@ export default function RegisterForm() {
 
   return (
     <div>
-      <form>
+      <form onSubmit={submitForm}>
         <fieldset>
           <legend>Register</legend>
           <label htmlFor="name">Name: </label>

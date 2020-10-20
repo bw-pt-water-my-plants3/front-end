@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import App from "./App";
-import LogInForm from "./components/LogInForm";
-import RegisterForm from "./components/RegisterForm";
+
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
