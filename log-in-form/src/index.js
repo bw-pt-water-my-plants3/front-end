@@ -9,9 +9,14 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Link to="/login">Login</Link>
+      <Link to="/">Log in</Link>
       <Link to="/register">Register</Link>
       <App />
+
+      <Switch>
+        <Route exact path="/" render={() => <LogInForm />} />
+        <Route path="/register" render={() => <RegisterForm />} />
+      </Switch>
     </Router>
   </React.StrictMode>,
   rootElement
