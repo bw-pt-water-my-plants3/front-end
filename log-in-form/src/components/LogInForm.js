@@ -3,7 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 
-export default function LogInForm() {
+export default function LoginForm() {
   const [formState, setFormState] = useState({
     username: "",
     password: ""
@@ -92,3 +92,4 @@ export default function LogInForm() {
     </div>
   );
 }
+
