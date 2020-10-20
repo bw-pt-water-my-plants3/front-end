@@ -9,8 +9,10 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+      <div className='Header'>
       <Link to="/">Log in</Link>
       <Link to="/register">Register</Link>
+      </div>
       <App />
 
       <Switch>
