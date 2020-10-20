@@ -41,8 +41,10 @@ textarea {
 }
 
 button {
-  width: 20%;
-  display: inline-block;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
   padding: 8px 11px;
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -58,9 +60,12 @@ nav{
   
 a{
   margin: 2rem;
-  text-align: right;
   font-size: 1.75rem;
-  
+
+}
+
+h2{
+  text-align: center;
 }
 
 

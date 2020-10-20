@@ -125,8 +125,9 @@ export default function LoginForm() {
           <button type="submit" disabled={buttonIsDisabled}>
             Sign In
           </button>
-
+            <h2>
           <Link to="/register">New User? </Link>
+          </h2>
         </fieldset>
       </form>
     </div>
