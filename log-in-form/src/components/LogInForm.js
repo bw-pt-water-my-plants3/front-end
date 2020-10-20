@@ -15,9 +15,45 @@ export default function LoginForm() {
   const [post, setPost] = useState([]);
   const [serverError, setServerError] = useState("");
 
-  const handleChange = (e) => {
-    const newFormObj = { ...formState, [e.target.name]: e.target.value };
-    setFormState(newFormObj);
+  const [errors, setErrors] = useState({
+    username: "",
+    password: ""
+  });
+
+
+
+  const validateChange = (e) => {
+    yup
+      .reach(formSchema, e.target.name)
+      .validate(e.target.value)
+      .then((valid) => {
+        setErrors({
+          ...errors,
+          [e.target.name]: ""
+        });
+      })
+      .catch((err) => {
+        setErrors({
+          ...errors,
+          [e.target.name]: err.errors[0]
+        });
+      });
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const inputChange = (e) => {
+    e.persist();
+    console.log("something changed");
+    const loginFormState = {
+      ...formState,
+      [e.target.name]: e.target.value
+    };
+    console.log(loginFormState);
+    setFormState(loginFormState);
+    validateChange(e);
   };
 
   // onSubmit function
@@ -68,19 +104,23 @@ export default function LoginForm() {
             id="username"
             name="username"
             value={formState.username}
-            onChange={handleChange}
+            onChange={inputChange}
           />
-          <br />
+          {errors.username.length > 0 ? (
+            <p className="error">{errors.username}</p>
+          ) : null}
+
           <label htmlFor="password"> Password: </label>
           <input
             type="password"
             id="password"
             name="password"
             value={formState.password}
-            onChange={handleChange}
+            onChange={inputChange}
           />
-          <br />
-          <br />
+          {errors.password.length > 0 ? (
+            <p className="error">{errors.password}</p>
+          ) : null}
 
           <button type="submit" disabled={buttonIsDisabled}>
             Sign In
@@ -92,4 +132,3 @@ export default function LoginForm() {
     </div>
   );
 }
-

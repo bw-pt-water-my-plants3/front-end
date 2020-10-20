@@ -15,10 +15,42 @@ export default function RegisterForm() {
   const [post, setPost] = useState([]);
   const [serverError, setServerError] = useState("");
 
-  const handleChange = (e) => {
-    const newFormObj = { ...formState, [e.target.name]: e.target.value };
-    setFormState(newFormObj);
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    username: "",
+    password: "",
+    verifyPassword: ""
+  });
+
+
+
+  const validateChange = (e) => {
+    yup
+      .reach(formSchema, e.target.name)
+      .validate(e.target.value)
+      .then((valid) => {
+        setErrors({ ...errors, [e.target.name]: "" });
+        console.log("success");
+      })
+      .catch((err) => {
+        setErrors({ ...errors, [e.target.name]: err.errors[0] });
+        console.log("error:", err);
+      });
   };
+
+  const inputChange = (e) => {
+    e.persist();
+    console.log("something changed");
+    const signupForm = {
+      ...formState,
+      [e.target.name]: e.target.value
+    };
+    setFormState(signupForm);
+    validateChange(e);
+  };
+
 
 
 
@@ -73,55 +105,72 @@ export default function RegisterForm() {
             type="text"
             id="name"
             name="name"
-            onChange={handleChange}
+            onChange={inputChange}
             value={formState.name}
-            required
           />
+          {errors.name.length > 0 ? (
+            <p className="error">{errors.name}</p>
+          ) : null}
+
           <label htmlFor="email">Email: </label>
           <input
             type="email"
             id="email"
             name="email"
-            onChange={handleChange}
+            onChange={inputChange}
             value={formState.email}
-            required
           />
-          <label htmlFor="phone">Phone number: </label>
+          {errors.email.length > 0 ? (
+            <p className="error">{errors.email}</p>
+          ) : null}
+
+          <label htmlFor="phone">Phone Number: </label>
           <input
             type="tel"
             id="phone"
             name="phone"
-            onChange={handleChange}
+            onChange={inputChange}
             value={formState.phone}
-            required
           />
+          {errors.phone.length > 0 ? (
+            <p className="error">{errors.phone}</p>
+          ) : null}
+
           <label htmlFor="username">Username: </label>
           <input
             type="text"
             id="username"
             name="username"
-            onChange={handleChange}
+            onChange={inputChange}
             value={formState.username}
-            required
           />
+          {errors.username.length > 0 ? (
+            <p className="error">{errors.username}</p>
+          ) : null}
+
           <label htmlFor="password">Password: </label>
           <input
             type="password"
             id="password"
             name="password"
-            onChange={handleChange}
+            onChange={inputChange}
             value={formState.password}
-            required
           />
-          <label htmlFor="confirmation">Re-enter password: </label>
+          {errors.password.length > 0 ? (
+            <p className="error">{errors.password}</p>
+          ) : null}
+
+          <label htmlFor="verifyPassword">Verify Password: </label>
           <input
             type="password"
-            id="confirmation"
-            name="confirmation"
-            onChange={handleChange}
-            value={formState.confirmation}
-            required
+            id="verifyPassword"
+            name="verifyPassword"
+            onChange={inputChange}
+            value={formState.verifyPassword}
           />
+          {errors.verifyPassword.length > 0 ? (
+            <p className="error">{errors.verifyPassword}</p>
+          ) : null}
 
           <button type="submit" disabled={buttonIsDisabled}>
             Sign Up
