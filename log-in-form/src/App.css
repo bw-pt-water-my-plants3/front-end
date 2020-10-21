@@ -29,9 +29,9 @@ label {
 
 input,
 textarea {
-  width: 95%;
+  width: 90%;
   margin: 5px 0 0;
-  display: block;
+  display: inline-block;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   padding: 10px;
@@ -74,4 +74,16 @@ width: 100%;
 text-align: right;
   
   }
+
+
+.toggle{
+  display: inline-block;
+  width: 100%;
+  margin: 1%;
+
+}
+
+i{
+  margin: 1%;
+}
   

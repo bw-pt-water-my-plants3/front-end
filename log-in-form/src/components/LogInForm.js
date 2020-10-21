@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 import axios from "axios";
 
-export default function RegisterForm() {
+
+
+
+
+export default function LoginForm() {
   const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    phone: "",
     username: "",
-    password: "",
-    verifyPassword: ""
+    password: ""
   });
 
   const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
+
+  // post request
   const [post, setPost] = useState([]);
   const [serverError, setServerError] = useState("");
 
   const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    phone: "",
     username: "",
-    password: "",
-    verifyPassword: ""
+    password: ""
   });
+
+  const eye = <FontAwesomeIcon icon={faEye} />;
+
+  const [password, setPassword] = useState(false);
+
+  const togglePassword = () =>{
+    setPassword(password ? false : true)
+  }
+
 
 
 
@@ -32,28 +42,34 @@ export default function RegisterForm() {
       .reach(formSchema, e.target.name)
       .validate(e.target.value)
       .then((valid) => {
-        setErrors({ ...errors, [e.target.name]: "" });
-        console.log("success");
+        setErrors({
+          ...errors,
+          [e.target.name]: ""
+        });
       })
       .catch((err) => {
-        setErrors({ ...errors, [e.target.name]: err.errors[0] });
-        console.log("error:", err);
+        setErrors({
+          ...errors,
+          [e.target.name]: err.errors[0]
+        });
       });
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value
+    });
   };
 
   const inputChange = (e) => {
     e.persist();
     console.log("something changed");
-    const signupForm = {
+    const loginFormState = {
       ...formState,
       [e.target.name]: e.target.value
     };
-    setFormState(signupForm);
+    console.log(loginFormState);
+    setFormState(loginFormState);
     validateChange(e);
   };
-
-
-
 
   // onSubmit function
   const submitForm = (e) => {
@@ -67,12 +83,8 @@ export default function RegisterForm() {
         setServerError(null)
 
         setFormState({
-          name: "",
-          email: "",
-          phone: "",
           username: "",
-          password: "",
-          verifyPassword: ""
+          password: ""
         });
       })
       .catch((err) => {
@@ -80,18 +92,14 @@ export default function RegisterForm() {
       });
   };
 
-  console.log(submitForm)
+  console.log(formState);
 
+  // add yup library
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Name is required."),
-    email: yup.string().email(),
-    phone: yup.string().required(),
-    username: yup.string().required("Username is required."),
-    password: yup.string().required("Enter a valid password"),
-    verifyPassword: yup.string().required("Enter a valid password")
+    username: yup.string().required("Name is required."),
+    password: yup.string().required("Enter a valid password")
   });
-
 
   useEffect(() => {
     formSchema.isValid(formState).then((valid) => {
@@ -104,82 +112,44 @@ export default function RegisterForm() {
     <div>
       <form onSubmit={submitForm}>
         <fieldset>
-          <legend>Register</legend>
-          <label htmlFor="name">Name: </label>
+          <legend>Log In</legend>
+          <label htmlFor="username">Username: 
           <input
-            type="text"
-            id="name"
-            name="name"
-            onChange={inputChange}
-            value={formState.name}
-          />
-          {errors.name.length > 0 ? (
-            <p className="error">{errors.name}</p>
-          ) : null}
-
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            onChange={inputChange}
-            value={formState.email}
-          />
-          {errors.email.length > 0 ? (
-            <p className="error">{errors.email}</p>
-          ) : null}
-
-          <label htmlFor="phone">Phone Number: </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            onChange={inputChange}
-            value={formState.phone}
-          />
-          {errors.phone.length > 0 ? (
-            <p className="error">{errors.phone}</p>
-          ) : null}
-
-          <label htmlFor="username">Username: </label>
-          <input
+            placeholder="Username"
             type="text"
             id="username"
             name="username"
-            onChange={inputChange}
             value={formState.username}
+            onChange={inputChange}
           />
           {errors.username.length > 0 ? (
             <p className="error">{errors.username}</p>
           ) : null}
-
-          <label htmlFor="password">Password: </label>
+            </label>
+          <label htmlFor="password"> Password: 
+          <div className="toggle">
           <input
-            type="password"
+            placeholder="Password"
+            type={password ? "text" : "password"}
             id="password"
             name="password"
-            onChange={inputChange}
             value={formState.password}
+            onChange={inputChange}
           />
+          <i onClick={togglePassword}>{eye}</i>
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}
+            </div>
+          </label>
 
-          <label htmlFor="verifyPassword">Verify Password: </label>
-          <input
-            type="password"
-            id="verifyPassword"
-            name="verifyPassword"
-            onChange={inputChange}
-            value={formState.verifyPassword}
-          />
-          {errors.verifyPassword.length > 0 ? (
-            <p className="error">{errors.verifyPassword}</p>
-          ) : null}
 
           <button type="submit" disabled={buttonIsDisabled}>
-            Sign Up
+            Sign In
           </button>
+            <h2>
+          <Link to="/register">New User? </Link>
+          </h2>
         </fieldset>
       </form>
     </div>
