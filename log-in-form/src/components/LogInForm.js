@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    phone: "",
     username: "",
-    password: ""
+    password: "",
+    verifyPassword: ""
   });
 
   const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
-
-  // post request
   const [post, setPost] = useState([]);
   const [serverError, setServerError] = useState("");
 
   const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
     username: "",
-    password: ""
+    password: "",
+    verifyPassword: ""
   });
 
 
@@ -27,34 +32,28 @@ export default function LoginForm() {
       .reach(formSchema, e.target.name)
       .validate(e.target.value)
       .then((valid) => {
-        setErrors({
-          ...errors,
-          [e.target.name]: ""
-        });
+        setErrors({ ...errors, [e.target.name]: "" });
+        console.log("success");
       })
       .catch((err) => {
-        setErrors({
-          ...errors,
-          [e.target.name]: err.errors[0]
-        });
+        setErrors({ ...errors, [e.target.name]: err.errors[0] });
+        console.log("error:", err);
       });
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value
-    });
   };
 
   const inputChange = (e) => {
     e.persist();
     console.log("something changed");
-    const loginFormState = {
+    const signupForm = {
       ...formState,
       [e.target.name]: e.target.value
     };
-    console.log(loginFormState);
-    setFormState(loginFormState);
+    setFormState(signupForm);
     validateChange(e);
   };
+
+
+
 
   // onSubmit function
   const submitForm = (e) => {
@@ -68,8 +67,12 @@ export default function LoginForm() {
         setServerError(null)
 
         setFormState({
+          name: "",
+          email: "",
+          phone: "",
           username: "",
-          password: ""
+          password: "",
+          verifyPassword: ""
         });
       })
       .catch((err) => {
@@ -77,14 +80,18 @@ export default function LoginForm() {
       });
   };
 
-  console.log(formState);
+  console.log(submitForm)
 
-  // add yup library
 
   const formSchema = yup.object().shape({
-    username: yup.string().required("Name is required."),
-    password: yup.string().required("Enter a valid password")
+    name: yup.string().required("Name is required."),
+    email: yup.string().email(),
+    phone: yup.string().required(),
+    username: yup.string().required("Username is required."),
+    password: yup.string().required("Enter a valid password"),
+    verifyPassword: yup.string().required("Enter a valid password")
   });
+
 
   useEffect(() => {
     formSchema.isValid(formState).then((valid) => {
@@ -97,37 +104,82 @@ export default function LoginForm() {
     <div>
       <form onSubmit={submitForm}>
         <fieldset>
-          <legend>Log In</legend>
+          <legend>Register</legend>
+          <label htmlFor="name">Name: </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            onChange={inputChange}
+            value={formState.name}
+          />
+          {errors.name.length > 0 ? (
+            <p className="error">{errors.name}</p>
+          ) : null}
+
+          <label htmlFor="email">Email: </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            onChange={inputChange}
+            value={formState.email}
+          />
+          {errors.email.length > 0 ? (
+            <p className="error">{errors.email}</p>
+          ) : null}
+
+          <label htmlFor="phone">Phone Number: </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            onChange={inputChange}
+            value={formState.phone}
+          />
+          {errors.phone.length > 0 ? (
+            <p className="error">{errors.phone}</p>
+          ) : null}
+
           <label htmlFor="username">Username: </label>
           <input
             type="text"
             id="username"
             name="username"
-            value={formState.username}
             onChange={inputChange}
+            value={formState.username}
           />
           {errors.username.length > 0 ? (
             <p className="error">{errors.username}</p>
           ) : null}
 
-          <label htmlFor="password"> Password: </label>
+          <label htmlFor="password">Password: </label>
           <input
             type="password"
             id="password"
             name="password"
-            value={formState.password}
             onChange={inputChange}
+            value={formState.password}
           />
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}
 
+          <label htmlFor="verifyPassword">Verify Password: </label>
+          <input
+            type="password"
+            id="verifyPassword"
+            name="verifyPassword"
+            onChange={inputChange}
+            value={formState.verifyPassword}
+          />
+          {errors.verifyPassword.length > 0 ? (
+            <p className="error">{errors.verifyPassword}</p>
+          ) : null}
+
           <button type="submit" disabled={buttonIsDisabled}>
-            Sign In
+            Sign Up
           </button>
-            <h2>
-          <Link to="/register">New User? </Link>
-          </h2>
         </fieldset>
       </form>
     </div>
