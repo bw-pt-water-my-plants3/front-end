@@ -126,8 +126,8 @@ export default function LoginForm() {
             <p className="error">{errors.username}</p>
           ) : null}
             </label>
-          <label htmlFor="password"> Password: 
-          <div className="toggle">
+          <label htmlFor="password"> Password: </label>
+   
           <input
             placeholder="Password"
             type={password ? "text" : "password"}
@@ -140,8 +140,8 @@ export default function LoginForm() {
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}
-            </div>
-          </label>
+
+          
 
 
           <button type="submit" disabled={buttonIsDisabled}>
