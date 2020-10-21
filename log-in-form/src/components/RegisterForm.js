@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 import axios from "axios";
 
@@ -24,6 +26,14 @@ export default function RegisterForm() {
     password: "",
     verifyPassword: ""
   });
+
+  const eye = <FontAwesomeIcon icon={faEye} />;
+
+  const [password, setPassword] = useState(false);
+
+  const togglePassword = () =>{
+    setPassword(password ? false : true)
+  }
 
 
 
@@ -155,19 +165,20 @@ export default function RegisterForm() {
 
           <label htmlFor="password">Password: </label>
           <input
-            type="password"
+            type={password ? "text" : "password"}
             id="password"
             name="password"
             onChange={inputChange}
             value={formState.password}
           />
+          <i onClick={togglePassword}>{eye}</i>
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}
 
           <label htmlFor="verifyPassword">Verify Password: </label>
           <input
-            type="password"
+            type={password ? "text" : "password"}
             id="verifyPassword"
             name="verifyPassword"
             onChange={inputChange}
@@ -176,6 +187,7 @@ export default function RegisterForm() {
           {errors.verifyPassword.length > 0 ? (
             <p className="error">{errors.verifyPassword}</p>
           ) : null}
+        
 
           <button type="submit" disabled={buttonIsDisabled}>
             Sign Up
