@@ -84,12 +84,11 @@ export default function RegisterForm() {
 
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Name is required."),
+    name: yup.string().required("Name is required"),
     email: yup.string().email(),
     phone: yup.string().required(),
-    username: yup.string().required("Username is required."),
+    username: yup.string().required("Username is required"),
     password: yup.string().required("Enter a valid password"),
-    verifyPassword: yup.string().required("Enter a valid password")
   });
 
 
@@ -104,8 +103,8 @@ export default function RegisterForm() {
     <div>
       <form onSubmit={submitForm}>
         <fieldset>
-          <legend>Register</legend>
-          <label htmlFor="name">Name: </label>
+          <legend><h1>Register</h1></legend>
+          <label htmlFor="name" className="labels">Name: </label>
           <input
             type="text"
             id="name"
@@ -117,7 +116,7 @@ export default function RegisterForm() {
             <p className="error">{errors.name}</p>
           ) : null}
 
-          <label htmlFor="email">Email: </label>
+          <label htmlFor="email" className="labels">Email: </label>
           <input
             type="email"
             id="email"
@@ -129,7 +128,7 @@ export default function RegisterForm() {
             <p className="error">{errors.email}</p>
           ) : null}
 
-          <label htmlFor="phone">Phone Number: </label>
+          <label htmlFor="phone" className="labels">Phone Number: </label>
           <input
             type="tel"
             id="phone"
@@ -141,7 +140,7 @@ export default function RegisterForm() {
             <p className="error">{errors.phone}</p>
           ) : null}
 
-          <label htmlFor="username">Username: </label>
+          <label htmlFor="username" className="labels">Username: </label>
           <input
             type="text"
             id="username"
@@ -153,7 +152,7 @@ export default function RegisterForm() {
             <p className="error">{errors.username}</p>
           ) : null}
 
-          <label htmlFor="password">Password: </label>
+          <label htmlFor="password" className="labels">Password: </label>
           <input
             type="password"
             id="password"
@@ -163,18 +162,6 @@ export default function RegisterForm() {
           />
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
-          ) : null}
-
-          <label htmlFor="verifyPassword">Verify Password: </label>
-          <input
-            type="password"
-            id="verifyPassword"
-            name="verifyPassword"
-            onChange={inputChange}
-            value={formState.verifyPassword}
-          />
-          {errors.verifyPassword.length > 0 ? (
-            <p className="error">{errors.verifyPassword}</p>
           ) : null}
 
           <button type="submit" disabled={buttonIsDisabled}>

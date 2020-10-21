@@ -1,10 +1,12 @@
 body{
   font-size: 1.4rem;
+  font-family: 'Cabin', sans-serif;
+  background-color: #4EC274;
 }
 
 html {
   font-size: 62.5%;
-
+  color: white;
 }
 
 .App {
@@ -17,6 +19,14 @@ form {
   flex-direction: column;
   width: 50%;
   margin: 0 auto;
+  
+ 
+}
+
+fieldset {
+  border: 2px solid white;
+  border-radius: 2rem;
+  padding: 2.5rem;
 }
 
 label {
@@ -49,6 +59,7 @@ button {
   border: 0;
   border-radius: 5px;
   letter-spacing: 2px;
+  
 
 }
 
@@ -60,13 +71,35 @@ a{
   margin: 2rem;
   text-align: right;
   font-size: 1.75rem;
+  text-decoration: none;
+  color: white;
   
 }
 
+a:hover {
+  text-decoration: underline;
+}
 
   .Header{
 width: 100%;
 text-align: right;
   
   }
+  
+  .labels {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .bottom-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+ 
   
