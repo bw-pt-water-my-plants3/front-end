@@ -39,9 +39,9 @@ label {
 
 input,
 textarea {
-  width: 95%;
+  width: 90%;
   margin: 5px 0 0;
-  display: block;
+  display: inline-block;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   padding: 10px;
@@ -51,15 +51,19 @@ textarea {
 }
 
 button {
-  width: 20%;
-  display: inline-block;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
   padding: 8px 11px;
   font-size: 1.2rem;
   text-transform: uppercase;
   border: 0;
   border-radius: 5px;
   letter-spacing: 2px;
-  
+  margin: 0 auto;
+  margin-top: 2%;
+
 
 }
 
@@ -69,11 +73,18 @@ nav{
   
 a{
   margin: 2rem;
-  text-align: right;
   font-size: 1.75rem;
   text-decoration: none;
+  background-color: #4EC274;
   color: white;
-  
+  text-decoration: none;
+  padding: .7rem;
+  border-radius: 25px;
+
+}
+
+h2{
+  text-align: center;
 }
 
 a:hover {
@@ -85,6 +96,12 @@ width: 100%;
 text-align: right;
   
   }
+
+
+
+i{
+  margin: 1%;
+}
   
   .labels {
     font-size: 1.5rem;

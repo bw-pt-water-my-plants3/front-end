@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 import axios from "axios";
+
+
+
+
 
 export default function LoginForm() {
   const [formState, setFormState] = useState({
@@ -19,6 +25,15 @@ export default function LoginForm() {
     username: "",
     password: ""
   });
+
+  const eye = <FontAwesomeIcon icon={faEye} />;
+
+  const [password, setPassword] = useState(false);
+
+  const togglePassword = () =>{
+    setPassword(password ? false : true)
+  }
+
 
 
 
@@ -101,6 +116,7 @@ export default function LoginForm() {
             <h1>Log In</h1></legend>
           <label htmlFor="username" className="labels">Username: </label>
           <input
+            placeholder="Username"
             type="text"
             id="username"
             name="username"
@@ -111,25 +127,26 @@ export default function LoginForm() {
             <p className="error">{errors.username}</p>
           ) : null}
 
+
           <label htmlFor="password" className="labels"> Password: </label>
           <input
-            type="password"
+            placeholder="Password"
+            type={password ? "text" : "password"}
             id="password"
             name="password"
             value={formState.password}
             onChange={inputChange}
           />
+          <i onClick={togglePassword}>{eye}</i>
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}
-
-          <div className="bottom-form">
-            <button type="submit" disabled={buttonIsDisabled}>
-              Sign In
-            </button>
-
-            <Link to="/register">New User? </Link>
-          </div>
+          <button type="submit" disabled={buttonIsDisabled}>
+            Sign In
+          </button>
+            <h2>
+          <Link to="/register">New User? </Link>
+          </h2>
         </fieldset>
       </form>
     </div>
