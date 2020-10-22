@@ -97,8 +97,8 @@ export default function LoginForm() {
   // add yup library
 
   const formSchema = yup.object().shape({
-    username: yup.string().required("Name is required."),
-    password: yup.string().required("Enter a valid password")
+    username: yup.string().required("Username is required"),
+    password: yup.string().required("Enter your password")
   });
 
   useEffect(() => {
@@ -112,8 +112,9 @@ export default function LoginForm() {
     <div>
       <form onSubmit={submitForm}>
         <fieldset>
-          <legend>Log In</legend>
-          <label htmlFor="username">Username: 
+          <legend>
+            <h1>Log In</h1></legend>
+          <label htmlFor="username" className="labels">Username: </label>
           <input
             placeholder="Username"
             type="text"
@@ -125,9 +126,9 @@ export default function LoginForm() {
           {errors.username.length > 0 ? (
             <p className="error">{errors.username}</p>
           ) : null}
-            </label>
-          <label htmlFor="password"> Password: </label>
-   
+
+
+          <label htmlFor="password" className="labels"> Password: </label>
           <input
             placeholder="Password"
             type={password ? "text" : "password"}
@@ -140,10 +141,6 @@ export default function LoginForm() {
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}
-
-          
-
-
           <button type="submit" disabled={buttonIsDisabled}>
             Sign In
           </button>
