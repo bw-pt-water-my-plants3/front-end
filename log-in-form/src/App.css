@@ -29,9 +29,9 @@ label {
 
 input,
 textarea {
-  width: 95%;
+  width: 90%;
   margin: 5px 0 0;
-  display: block;
+  display: inline-block;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   padding: 10px;
@@ -41,7 +41,7 @@ textarea {
 }
 
 button {
-  width: 100%;
+  width: 50%;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -51,6 +51,8 @@ button {
   border: 0;
   border-radius: 5px;
   letter-spacing: 2px;
+  margin: 0 auto;
+  margin-top: 2%;
 
 }
 
@@ -61,6 +63,11 @@ nav{
 a{
   margin: 2rem;
   font-size: 1.75rem;
+  background-color: #4EC274;
+  color: white;
+  text-decoration: none;
+  padding: .7rem;
+  border-radius: 25px;
 
 }
 
@@ -74,4 +81,10 @@ width: 100%;
 text-align: right;
   
   }
+
+
+
+i{
+  margin: 1%;
+}
   
