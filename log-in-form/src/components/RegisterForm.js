@@ -100,7 +100,7 @@ export default function RegisterForm() {
 
 
   useEffect(() => {
-    formSchema.isValid(formState).then((valid) => {
+    form  .isValid(formState).then((valid) => {
       console.log("Is my form valid?", valid);
       setButtonIsDisabled(!valid);
     });
@@ -113,6 +113,7 @@ export default function RegisterForm() {
           <legend><h1>Register</h1></legend>
           <label htmlFor="name" className="labels">Name: </label>
           <input
+          placeholder="Name"
             type="text"
             id="name"
             name="name"
@@ -125,6 +126,7 @@ export default function RegisterForm() {
 
           <label htmlFor="email" className="labels">Email: </label>
           <input
+            placeholder="Email"
             type="email"
             id="email"
             name="email"
@@ -137,6 +139,7 @@ export default function RegisterForm() {
 
           <label htmlFor="phone" className="labels">Phone Number: </label>
           <input
+            placeholder="Phone Number"
             type="tel"
             id="phone"
             name="phone"
@@ -149,6 +152,7 @@ export default function RegisterForm() {
 
           <label htmlFor="username" className="labels">Username: </label>
           <input
+            placeholder="Username"
             type="text"
             id="username"
             name="username"
@@ -161,6 +165,7 @@ export default function RegisterForm() {
 
           <label htmlFor="password" className="labels">Password: </label>
           <input
+           placeholder="Password"
             type={password ? "text" : "password"}
             id="password"
             name="password"
