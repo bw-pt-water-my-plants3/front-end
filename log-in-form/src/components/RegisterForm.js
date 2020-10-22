@@ -11,7 +11,6 @@ export default function RegisterForm() {
     phone: "",
     username: "",
     password: "",
-    verifyPassword: ""
   });
 
   const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
@@ -24,7 +23,6 @@ export default function RegisterForm() {
     phone: "",
     username: "",
     password: "",
-    verifyPassword: ""
   });
 
   const eye = <FontAwesomeIcon icon={faEye} />;
@@ -82,7 +80,6 @@ export default function RegisterForm() {
           phone: "",
           username: "",
           password: "",
-          verifyPassword: ""
         });
       })
       .catch((err) => {
@@ -173,17 +170,6 @@ export default function RegisterForm() {
           <i onClick={togglePassword}>{eye}</i>
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
-          ) : null}
-          <label htmlFor="verifyPassword">Verify Password: </label>
-          <input
-            type={password ? "text" : "password"}
-            id="verifyPassword"
-            name="verifyPassword"
-            onChange={inputChange}
-            value={formState.verifyPassword}
-          />
-          {errors.verifyPassword.length > 0 ? (
-            <p className="error">{errors.verifyPassword}</p>
           ) : null}
    
           <button type="submit" disabled={buttonIsDisabled}>
