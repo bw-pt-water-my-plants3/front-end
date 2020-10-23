@@ -4,6 +4,8 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 import axios from "axios";
 
+
+
 export default function RegisterForm() {
   const [formState, setFormState] = useState({
     name: "",
@@ -100,11 +102,13 @@ export default function RegisterForm() {
 
 
   useEffect(() => {
-    form  .isValid(formState).then((valid) => {
+    formSchema.isValid(formState).then((valid) => {
       console.log("Is my form valid?", valid);
       setButtonIsDisabled(!valid);
     });
   }, [formState]);
+
+
 
   return (
     <div>
@@ -172,7 +176,7 @@ export default function RegisterForm() {
             onChange={inputChange}
             value={formState.password}
           />
-          <i onClick={togglePassword}>{eye}</i>
+          <i onClick={togglePassword} title="Hide/Unhide">{eye}</i>
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}
