@@ -5,6 +5,8 @@ import * as yup from "yup";
 import axios from "axios";
 import { axiosWithAuth1 } from "../utils/axiosWithAuth";
 
+
+
 export default function RegisterForm() {
   const [formState, setFormState] = useState({
     name: "",
@@ -109,6 +111,8 @@ export default function RegisterForm() {
     });
   }, [formState]);
 
+
+
   return (
     <div>
       <form onSubmit={submitForm}>
@@ -116,6 +120,7 @@ export default function RegisterForm() {
           <legend><h1>Register</h1></legend>
           <label htmlFor="name" className="labels">Name: </label>
           <input
+          placeholder="Name"
             type="text"
             id="name"
             name="name"
@@ -128,6 +133,7 @@ export default function RegisterForm() {
 
           <label htmlFor="email" className="labels">Email: </label>
           <input
+            placeholder="Email"
             type="email"
             id="email"
             name="email"
@@ -140,6 +146,7 @@ export default function RegisterForm() {
 
           <label htmlFor="phone" className="labels">Phone Number: </label>
           <input
+            placeholder="Phone Number"
             type="tel"
             id="phone"
             name="phone"
@@ -152,6 +159,7 @@ export default function RegisterForm() {
 
           <label htmlFor="username" className="labels">Username: </label>
           <input
+            placeholder="Username"
             type="text"
             id="username"
             name="username"
@@ -164,13 +172,14 @@ export default function RegisterForm() {
 
           <label htmlFor="password" className="labels">Password: </label>
           <input
+           placeholder="Password"
             type={password ? "text" : "password"}
             id="password"
             name="password"
             onChange={inputChange}
             value={formState.password}
           />
-          <i onClick={togglePassword}>{eye}</i>
+          <i onClick={togglePassword} title="Hide/Unhide">{eye}</i>
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}

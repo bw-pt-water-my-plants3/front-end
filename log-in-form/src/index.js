@@ -22,6 +22,7 @@ ReactDOM.render(
       
       <div className='Header'>
 
+      <a href="https://affectionate-clarke-6222ba.netlify.app/">Home</a>
 
       <Link to="/">Log in</Link>
       <Link to="/register">Register</Link>
