@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 import axios from "axios";
+import { axiosWithAuth1 } from "../utils/axiosWithAuth";
 
 
 
@@ -60,19 +61,18 @@ export default function RegisterForm() {
     };
     setFormState(signupForm);
     validateChange(e);
-  };
+  }
 
 
-
-
-  // onSubmit function
   const submitForm = (e) => {
     e.preventDefault()
-    axios
-      .post("https://reqres.in/api/users", formState)
-      .then((resp) => {
-
-        setPost(resp.data);
+      axiosWithAuth1()
+        .post("https://reqres.in/api/auth/register", formState)
+        .then((res) => {
+          console.log("JG: Login.js: login: res: ", res);
+          localStorage.setItem("token", res.data.payload);
+          this.props.history.push("/protected");
+          setPost(res.data);
 
         setServerError(null)
 
@@ -88,6 +88,9 @@ export default function RegisterForm() {
         setServerError("oops! something happened!");
       });
   };
+  
+
+
 
   console.log(submitForm)
 
@@ -180,7 +183,7 @@ export default function RegisterForm() {
           {errors.password.length > 0 ? (
             <p className="error">{errors.password}</p>
           ) : null}
-   
+
           <button type="submit" disabled={buttonIsDisabled}>
             Sign Up
           </button>

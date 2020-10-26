@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth"; // Added utils file to submit  form 
+import { postLogin, getUsers, fetchAllPlants } from '../actions/actions'
 
 
 
@@ -71,26 +73,33 @@ export default function LoginForm() {
     validateChange(e);
   };
 
-  // onSubmit function
+
+
   const submitForm = (e) => {
     e.preventDefault()
-    axios
-      .post("https://reqres.in/api/users", formState)
-      .then((resp) => {
-
-        setPost(resp.data);
+      axiosWithAuth()
+        .post("https://reqres.in/api/auth/login", formState)
+        .then((res) => {
+          console.log("JG: Login.js: login: res: ", res);
+          localStorage.setItem("token", res.data.payload);
+          this.props.history.push("/protected");
+          setPost(res.data);
 
         setServerError(null)
 
         setFormState({
           username: "",
-          password: ""
+          password: "",
         });
       })
       .catch((err) => {
         setServerError("oops! something happened!");
       });
   };
+  
+
+
+
 
   console.log(formState);
 
