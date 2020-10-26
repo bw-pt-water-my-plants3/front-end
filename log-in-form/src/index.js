@@ -9,7 +9,9 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      
+      <div>
+      <h1>Water My Plants</h1>
+      </div>
       <div className='Header'>
       <a href="https://affectionate-clarke-6222ba.netlify.app/">Home</a>
       <Link to="/">Log in</Link>
